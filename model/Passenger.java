@@ -11,7 +11,7 @@ public class Passenger {
     private final LocalTime preferredTime;
 
     public Passenger(String id, String name, String pickupLocation,
-                     String dropOffLocation, LocalTime preferredTime) {
+                    String dropOffLocation, LocalTime preferredTime) {
         this.id = id;
         this.name = name;
         this.pickupLocation = pickupLocation;

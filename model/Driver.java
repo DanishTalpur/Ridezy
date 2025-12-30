@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Driver {
 
@@ -11,6 +13,7 @@ public class Driver {
     private final LocalTime departureTime;
     private int availableSeats;
     private final double pricePerSeat;
+    private final List<String> bookedPassengerIds; // Track passenger IDs booked
 
     public Driver(String id, String name, String startLocation, String endLocation,
                   LocalTime departureTime, int availableSeats, double pricePerSeat) {
@@ -21,8 +24,10 @@ public class Driver {
         this.departureTime = departureTime;
         this.availableSeats = availableSeats;
         this.pricePerSeat = pricePerSeat;
+        this.bookedPassengerIds = new ArrayList<>();
     }
 
+    // -------------------- Getters --------------------
     public String getId() {
         return id;
     }
@@ -51,9 +56,30 @@ public class Driver {
         return pricePerSeat;
     }
 
-    public void decrementSeat() {
+    public List<String> getBookedPassengerIds() {
+        return bookedPassengerIds;
+    }
+
+    // -------------------- Seat Management --------------------
+    public boolean hasAvailableSeats() {
+        return availableSeats > 0;
+    }
+
+    public void decrementSeat(String passengerId) {
         if (availableSeats > 0) {
             availableSeats--;
+            bookedPassengerIds.add(passengerId);
         }
+    }
+
+    public void incrementSeat(String passengerId) {
+        if (bookedPassengerIds.remove(passengerId)) {
+            availableSeats++;
+        }
+    }
+
+    // -------------------- Optional --------------------
+    public boolean isPassengerBooked(String passengerId) {
+        return bookedPassengerIds.contains(passengerId);
     }
 }

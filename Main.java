@@ -1,5 +1,5 @@
 import datastructures.Graph;
-import ui.console.ConsoleUI;
+import ui.ConsoleUI;
 import util.CityGraphBuilder;
 
 public class Main {
