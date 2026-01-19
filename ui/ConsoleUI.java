@@ -28,7 +28,11 @@ public class ConsoleUI {
     }
 
     public void start() {
-        System.out.println("===== Welcome to Smart City–University Ride Sharing =====");
+        System.out.println("=======================================");
+        System.out.println("||      \uD83C\uDF08 Welcome to Ridezy \uD83C\uDF08      ||");
+        System.out.println("||       Let's ride together \uD83D\uDE0E      ||");
+        System.out.println("=======================================");
+        System.out.println();
 
         boolean running = true;
         while (running) {
@@ -53,10 +57,10 @@ public class ConsoleUI {
             case "1" -> registerOrLoginPassenger();
             case "2" -> registerOrLoginDriver();
             case "0" -> {
-                System.out.println("Goodbye!");
+                System.out.println("Goodbye! Enjoy the Ride \uD83E\uDD7A \uD83D\uDC49\uD83D\uDC48");
                 System.exit(0);
             }
-            default -> System.out.println("Invalid choice.");
+            default -> System.out.println("Invalid choice.\uD83D\uDE28");
         }
     }
 
@@ -67,7 +71,7 @@ public class ConsoleUI {
         Passenger passenger = storage.getPassengers().get(id);
         if (passenger != null) {
             currentPassenger = passenger;
-            System.out.println("Welcome back, " + passenger.getName());
+            System.out.println("Welcome back, " + passenger.getName() +" \uD83D\uDE0E");
             return;
         }
 
@@ -128,7 +132,7 @@ public class ConsoleUI {
 
     // ---------------------- Passenger Menu ----------------------
     private void passengerMenu() {
-        System.out.println("\n===== Passenger Menu (" + currentPassenger.getName() + ") =====");
+        System.out.println("\n===== Passenger Menu (" + currentPassenger.getName() + ") \uD83E\uDD20 =====");
         System.out.println("1. Request Ride");
         System.out.println("2. View Ride History");
         System.out.println("3. Cancel Active Ride");
@@ -141,7 +145,7 @@ public class ConsoleUI {
             case "2" -> viewRideHistory();
             case "3" -> cancelRide();
             case "4" -> logoutPassenger();
-            default -> System.out.println("Invalid option.");
+            default -> System.out.println("Invalid option.\uD83D\uDE28");
         }
     }
 
@@ -208,8 +212,8 @@ public class ConsoleUI {
             System.out.print("Enter the number of the ride you want to choose: ");
             int choice = Integer.parseInt(scanner.nextLine());
             if (choice < 1 || choice > allMatches.size()) {
-                System.out.println("Invalid choice. Booking best match by default.");
-                selectedMatch = bestMatch;
+                System.out.println("None chosen.");
+                return;
             } else {
                 selectedMatch = allMatches.get(choice - 1);
             }
@@ -244,7 +248,7 @@ public class ConsoleUI {
 
     // ---------------------- Driver Menu ----------------------
     private void driverMenu() {
-        System.out.println("\n===== Driver Menu (" + currentDriver.getName() + ") =====");
+        System.out.println("\n===== Driver Menu (" + currentDriver.getName() + ")\uD83E\uDD20 =====");
         System.out.println("1. View / Cancel Passengers");
         System.out.println("2. Logout");
         System.out.print("Choose option: ");
@@ -281,13 +285,13 @@ public class ConsoleUI {
         if (choice == 0) return;
 
         if (choice < 1 || choice > matches.size()) {
-            System.out.println("Invalid choice.");
+            System.out.println("Invalid choice. \uD83D\uDE28");
             return;
         }
 
         RideMatch toCancel = matches.get(choice - 1);
         toCancel.getDriver().incrementSeat(toCancel.getPassenger().getId());
         history.removeRide(toCancel);
-        System.out.println("Passenger " + toCancel.getPassenger().getName() + " removed from your ride.");
+        System.out.println("Passenger " + toCancel.getPassenger().getName() + " removed from your ride. ");
     }
 }
