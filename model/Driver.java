@@ -6,24 +6,18 @@ import java.util.List;
 
 public class Driver {
 
-    private final String id;
-    private final String name;
-    private final String startLocation;
-    private final String endLocation;
-    private final LocalTime departureTime;
+    private String id;
+    private String name;
+    private String startLocation;
+    private String endLocation;
+    private LocalTime departureTime;
     private int availableSeats;
-    private final double pricePerSeat;
-    private final List<String> bookedPassengerIds; // Track passenger IDs booked
+    private double pricePerSeat;
+    private List<String> bookedPassengerIds; // Track passenger IDs booked
 
-    public Driver(String id, String name, String startLocation, String endLocation,
-                  LocalTime departureTime, int availableSeats, double pricePerSeat) {
+    public Driver(String id, String name) {
         this.id = id;
         this.name = name;
-        this.startLocation = startLocation;
-        this.endLocation = endLocation;
-        this.departureTime = departureTime;
-        this.availableSeats = availableSeats;
-        this.pricePerSeat = pricePerSeat;
         this.bookedPassengerIds = new ArrayList<>();
     }
 
@@ -60,16 +54,49 @@ public class Driver {
         return bookedPassengerIds;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
+    }
+
+    public void setEndLocation(String endLocation) {
+        this.endLocation = endLocation;
+    }
+
+    public void setDepartureTime(LocalTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public void setAvailableSeats(int availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
+    public void setPricePerSeat(double pricePerSeat) {
+        this.pricePerSeat = pricePerSeat;
+    }
+
+    public void setBookedPassengerIds(List<String> bookedPassengerIds) {
+        this.bookedPassengerIds = bookedPassengerIds;
+    }
+
     // -------------------- Seat Management --------------------
     public boolean hasAvailableSeats() {
         return availableSeats > 0;
     }
 
     public void decrementSeat(String passengerId) {
-        if (availableSeats > 0) {
-            availableSeats--;
-            bookedPassengerIds.add(passengerId);
+        if (availableSeats <= 0) {
+            throw new IllegalStateException("No seats available");
         }
+        availableSeats--;
+        bookedPassengerIds.add(passengerId);
     }
 
     public void incrementSeat(String passengerId) {
