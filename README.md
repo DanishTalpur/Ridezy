@@ -62,6 +62,7 @@ The system demonstrates:
 * Offer rides with custom routes
 * Manage available seats
 * View and cancel passengers
+* View ride history
 * Mark rides as completed
 
 ---
@@ -75,6 +76,7 @@ A passenger can:
 * Request a ride
 * Choose from available drivers
 * Track current and past rides
+* Look at ride History
 
 ### 🚘 Driver
 
@@ -83,6 +85,7 @@ A driver can:
 * Offer rides
 * Manage passengers
 * Complete rides
+* Look at ride History
 
 ---
 
@@ -154,9 +157,11 @@ A `PriorityQueue<RideMatch>` ensures efficient retrieval of the best option.
 ### Driver Menu
 
 ```
-1. View / Cancel Passengers
-2. Mark Ride as Done
-3. Logout
+1. Create Ride
+2. View / Cancel Passengers
+3. Mark Ride as Done
+4. View Ride History
+5. Logout
 ```
 
 ---
@@ -168,6 +173,7 @@ A `PriorityQueue<RideMatch>` ensures efficient retrieval of the best option.
 * **Collections Framework**
 * **Priority Queue**
 * **Graph Algorithms (Dijkstra)**
+* **A lot of Datastructures**
 * **Console-Based UI**
 
 ---
@@ -186,13 +192,11 @@ Each layer (UI, service, model, storage) operates independently, making the syst
 
 ## 🚀 Future Enhancements
 
-* Role switching (Passenger ⇄ Driver)
 * Database integration (MySQL / PostgreSQL)
 * GUI or Web interface
 * Real-time GPS integration
 * Ride ratings and feedback
 * Admin dashboard
-* Payment simulation
 
 ---
 
@@ -208,7 +212,9 @@ This project serves as a strong foundation for building **real-world transportat
 ### 👨‍💻 Developed By
 
 **Ridezy Team**
+
 Danish Talpur
+
 Sohaib Rafiq
 
 Java Console Project
