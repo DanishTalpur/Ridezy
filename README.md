@@ -214,4 +214,5 @@ This project serves as a strong foundation for building **real-world transportat
 **Ridezy Team**
 
 *Danish Talpur*
+
 *Sohaib Rafiq*
