@@ -4,19 +4,15 @@ import java.time.LocalTime;
 
 public class Passenger {
 
-    private final String id;
-    private final String name;
-    private final String pickupLocation;
-    private final String dropOffLocation;
-    private final LocalTime preferredTime;
+    private String id;
+    private String name;
+    private String pickupLocation;
+    private String dropOffLocation;
+    private LocalTime preferredTime;
 
-    public Passenger(String id, String name, String pickupLocation,
-                    String dropOffLocation, LocalTime preferredTime) {
+    public Passenger(String id, String name) {
         this.id = id;
         this.name = name;
-        this.pickupLocation = pickupLocation;
-        this.dropOffLocation = dropOffLocation;
-        this.preferredTime = preferredTime;
     }
 
     public String getId() {
@@ -37,5 +33,25 @@ public class Passenger {
 
     public LocalTime getPreferredTime() {
         return preferredTime;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPickupLocation(String pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
+
+    public void setDropOffLocation(String dropOffLocation) {
+        this.dropOffLocation = dropOffLocation;
+    }
+
+    public void setPreferredTime(LocalTime preferredTime) {
+        this.preferredTime = preferredTime;
     }
 }

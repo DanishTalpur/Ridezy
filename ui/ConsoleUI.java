@@ -23,12 +23,16 @@ public class ConsoleUI {
     public ConsoleUI(Graph graph) {
         this.scanner = new Scanner(System.in);
         this.storage = new UserStorage();
-        this.history = new RideHistory();
+        this.history = new RideHistory(storage);
         this.matchingEngine = new MatchingEngine(graph, storage);
     }
 
     public void start() {
-        System.out.println("===== Welcome to Smart City–University Ride Sharing =====");
+        System.out.println("=======================================");
+        System.out.println("||      \uD83C\uDF08 Welcome to Ridezy \uD83C\uDF08      ||");
+        System.out.println("||       Let's ride together \uD83D\uDE0E      ||");
+        System.out.println("=======================================");
+        System.out.println();
 
         boolean running = true;
         while (running) {
@@ -53,10 +57,10 @@ public class ConsoleUI {
             case "1" -> registerOrLoginPassenger();
             case "2" -> registerOrLoginDriver();
             case "0" -> {
-                System.out.println("Goodbye!");
+                System.out.println("Goodbye! Enjoy the Ride \uD83E\uDD7A \uD83D\uDC49\uD83D\uDC48");
                 System.exit(0);
             }
-            default -> System.out.println("Invalid choice.");
+            default -> System.out.println("Invalid choice.\uD83D\uDE28");
         }
     }
 
@@ -67,24 +71,14 @@ public class ConsoleUI {
         Passenger passenger = storage.getPassengers().get(id);
         if (passenger != null) {
             currentPassenger = passenger;
-            System.out.println("Welcome back, " + passenger.getName());
+            System.out.println("Welcome back, " + passenger.getName() +" \uD83D\uDE0E");
             return;
         }
 
-        // Registration
         System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Pickup Location: ");
-        String pickup = scanner.nextLine();
-
-        System.out.print("Drop-off Location: ");
-        String drop = scanner.nextLine();
-
-        System.out.print("Preferred Time (HH:mm): ");
-        LocalTime time = LocalTime.parse(scanner.nextLine());
-
-        passenger = new Passenger(id, name, pickup, drop, time);
+        passenger = new Passenger(id, name);
         storage.addPassenger(passenger);
         currentPassenger = passenger;
         System.out.println("Passenger registered and logged in as " + name);
@@ -105,22 +99,9 @@ public class ConsoleUI {
         System.out.print("Name: ");
         String name = scanner.nextLine();
 
-        System.out.print("Start Location: ");
-        String start = scanner.nextLine();
 
-        System.out.print("End Location: ");
-        String end = scanner.nextLine();
 
-        System.out.print("Departure Time (HH:mm): ");
-        LocalTime time = LocalTime.parse(scanner.nextLine());
-
-        System.out.print("Available Seats: ");
-        int seats = Integer.parseInt(scanner.nextLine());
-
-        System.out.print("Price per Seat: ");
-        double price = Double.parseDouble(scanner.nextLine());
-
-        driver = new Driver(id, name, start, end, time, seats, price);
+        driver = new Driver(id, name);
         storage.addDriver(driver);
         currentDriver = driver;
         System.out.println("Driver registered and logged in as " + name);
@@ -128,11 +109,12 @@ public class ConsoleUI {
 
     // ---------------------- Passenger Menu ----------------------
     private void passengerMenu() {
-        System.out.println("\n===== Passenger Menu (" + currentPassenger.getName() + ") =====");
+        System.out.println("\n===== Passenger Menu (" + currentPassenger.getName() + ") \uD83E\uDD20 =====");
         System.out.println("1. Request Ride");
         System.out.println("2. View Ride History");
         System.out.println("3. Cancel Active Ride");
-        System.out.println("4. Logout");
+        System.out.println("4. Mark Ride as Done");
+        System.out.println("5. Logout");
         System.out.print("Choose option: ");
         String choice = scanner.nextLine();
 
@@ -140,9 +122,19 @@ public class ConsoleUI {
             case "1" -> requestRide();
             case "2" -> viewRideHistory();
             case "3" -> cancelRide();
-            case "4" -> logoutPassenger();
-            default -> System.out.println("Invalid option.");
+            case "4" -> markRideDone();
+            case "5" -> logoutPassenger();
+            default -> System.out.println("Invalid option.\uD83D\uDE28");
         }
+    }
+
+    private void markRideDone() {
+        if (!history.hasActiveRide(currentPassenger)) {
+            System.out.println("No active ride.");
+            return;
+        }
+        history.markRideCompleted(currentPassenger);
+        System.out.println("Ride marked as completed ✅");
     }
 
     private void logoutPassenger() {
@@ -157,6 +149,7 @@ public class ConsoleUI {
             return;
         }
         activeRide.getDriver().incrementSeat(currentPassenger.getId());
+        storage.saveDrivers();
         history.removeRide(activeRide);
         System.out.println("Ride canceled successfully.");
     }
@@ -166,6 +159,19 @@ public class ConsoleUI {
             System.out.println("You already have an active ride. Cancel it first to book a new one.");
             return;
         }
+
+        System.out.print("Pickup Location: ");
+        String pickup = scanner.nextLine();
+        currentPassenger.setPickupLocation(pickup);
+
+        System.out.print("Drop-off Location: ");
+        String drop = scanner.nextLine();
+        currentPassenger.setDropOffLocation(drop);
+
+        System.out.print("Preferred Time (HH:mm): ");
+        LocalTime time = LocalTime.parse(scanner.nextLine());
+        currentPassenger.setPreferredTime(time);
+
 
         PriorityQueue<RideMatch> matches = matchingEngine.findMatches(currentPassenger);
         if (matches.isEmpty()) {
@@ -208,8 +214,8 @@ public class ConsoleUI {
             System.out.print("Enter the number of the ride you want to choose: ");
             int choice = Integer.parseInt(scanner.nextLine());
             if (choice < 1 || choice > allMatches.size()) {
-                System.out.println("Invalid choice. Booking best match by default.");
-                selectedMatch = bestMatch;
+                System.out.println("None chosen.");
+                return;
             } else {
                 selectedMatch = allMatches.get(choice - 1);
             }
@@ -222,39 +228,155 @@ public class ConsoleUI {
         }
 
         selectedMatch.getDriver().decrementSeat(currentPassenger.getId());
-        history.addRide(selectedMatch);
+        storage.saveDrivers();
+        // Pass pickup and dropoff locations explicitly to ensure they're saved
+        history.addRide(selectedMatch, currentPassenger.getPickupLocation(), currentPassenger.getDropOffLocation());
         System.out.println("Ride booked successfully with Driver: " + selectedMatch.getDriver().getName());
     }
 
     private void viewRideHistory() {
-        System.out.println("\n===== Ride History =====");
+        System.out.println("\n===== My Ride History =====");
         List<RideMatch> rides = history.getRidesForPassenger(currentPassenger);
         if (rides.isEmpty()) {
             System.out.println("No rides booked yet.");
             return;
         }
+        
+        int activeCount = 0;
+        int completedCount = 0;
+        
+        System.out.println("┌─────────────────────────────────────────────────────────────────────────────┐");
+        System.out.println("│ Passenger: " + currentPassenger.getName() + " │");
+        System.out.println("├─────────────────────────────────────────────────────────────────────────────┤");
+        
         for (RideMatch match : rides) {
-            System.out.println(match.getPassenger().getName() + " → "
-                    + match.getDriver().getName()
-                    + " | Route: " + match.getDriver().getStartLocation() + " → " + match.getDriver().getEndLocation()
-                    + " | Departure: " + match.getDriver().getDepartureTime()
-                    + " | Price: " + match.getDriver().getPricePerSeat());
+            String status = history.getRideStatus(match) == model.RideStatus.ACTIVE ? "🟢 ACTIVE" : "✅ COMPLETED";
+            if (history.getRideStatus(match) == model.RideStatus.ACTIVE) {
+                activeCount++;
+            } else {
+                completedCount++;
+            }
+            // Get pickup and dropoff locations from stored ride data
+            String pickup = history.getPickupLocation(match);
+            String dropoff = history.getDropOffLocation(match);
+            // Fallback to passenger object if stored data is empty (for backward compatibility)
+            if (pickup == null || pickup.trim().isEmpty()) {
+                String passengerPickup = match.getPassenger().getPickupLocation();
+                pickup = (passengerPickup != null && !passengerPickup.trim().isEmpty()) ? passengerPickup : "N/A";
+            }
+            if (dropoff == null || dropoff.trim().isEmpty()) {
+                String passengerDropoff = match.getPassenger().getDropOffLocation();
+                dropoff = (passengerDropoff != null && !passengerDropoff.trim().isEmpty()) ? passengerDropoff : "N/A";
+            }
+            String route = pickup + " → " + dropoff;
+            System.out.println("│ Driver: " + padRight(match.getDriver().getName(), 15)
+                    + " | Route: " + padRight(route, 20)
+                    + " | Departure: " + padRight(match.getDriver().getDepartureTime() != null ? match.getDriver().getDepartureTime().toString() : "N/A", 8)
+                    + " | Price: Rs. " + match.getDriver().getPricePerSeat()
+                    + " | " + status + " │");
         }
+        
+        System.out.println("├─────────────────────────────────────────────────────────────────────────────┤");
+        System.out.println("│ Summary: " + activeCount + " Active | " + completedCount + " Completed | Total: " + rides.size() + " │");
+        System.out.println("└─────────────────────────────────────────────────────────────────────────────┘");
+    }
+
+    private void viewRideHistoryDriver() {
+        System.out.println("\n===== My Ride History =====");
+        List<RideMatch> rides = history.getRidesForDriver(currentDriver);
+        if (rides.isEmpty()) {
+            System.out.println("No rides created yet.");
+            return;
+        }
+        
+        int activeCount = 0;
+        int completedCount = 0;
+        
+        System.out.println("┌─────────────────────────────────────────────────────────────────────────────┐");
+        System.out.println("│ Route: " + (currentDriver.getStartLocation() != null ? currentDriver.getStartLocation() : "N/A") 
+                         + " → " + (currentDriver.getEndLocation() != null ? currentDriver.getEndLocation() : "N/A") + " │");
+        System.out.println("├─────────────────────────────────────────────────────────────────────────────┤");
+        
+        for (RideMatch match : rides) {
+            String status = history.getRideStatus(match) == model.RideStatus.ACTIVE ? "🟢 ACTIVE" : "✅ COMPLETED";
+            if (history.getRideStatus(match) == model.RideStatus.ACTIVE) {
+                activeCount++;
+            } else {
+                completedCount++;
+            }
+            System.out.println("│ Passenger: " + padRight(match.getPassenger().getName(), 15)
+                    + " | Pickup: " + padRight(match.getPassenger().getPickupLocation() != null ? match.getPassenger().getPickupLocation() : "N/A", 12)
+                    + " | Drop: " + padRight(match.getPassenger().getDropOffLocation() != null ? match.getPassenger().getDropOffLocation() : "N/A", 12)
+                    + " | " + status + " │");
+        }
+        
+        System.out.println("├─────────────────────────────────────────────────────────────────────────────┤");
+        System.out.println("│ Summary: " + activeCount + " Active | " + completedCount + " Completed | Total: " + rides.size() + " │");
+        System.out.println("└─────────────────────────────────────────────────────────────────────────────┘");
+    }
+
+    private String padRight(String s, int n) {
+        if (s == null) s = "";
+        return String.format("%-" + n + "s", s.length() > n ? s.substring(0, n-3) + "..." : s);
     }
 
     // ---------------------- Driver Menu ----------------------
     private void driverMenu() {
-        System.out.println("\n===== Driver Menu (" + currentDriver.getName() + ") =====");
-        System.out.println("1. View / Cancel Passengers");
-        System.out.println("2. Logout");
+        System.out.println("\n===== Driver Menu (" + currentDriver.getName() + ")\uD83E\uDD20 =====");
+        System.out.println("1. Create Ride");
+        System.out.println("2. View / Cancel Passengers");
+        System.out.println("3. Mark Ride as Done");
+        System.out.println("4. View Ride History");
+        System.out.println("5. Logout");
         System.out.print("Choose option: ");
         String choice = scanner.nextLine();
 
         switch (choice) {
-            case "1" -> managePassengers();
-            case "2" -> logoutDriver();
+            case "1" -> driverride();
+            case "2" -> managePassengers();
+            case "3" -> markRideDoneDriver();
+            case "4" -> viewRideHistoryDriver();
+            case "5" -> logoutDriver();
             default -> System.out.println("Invalid option.");
         }
+    }
+
+    private void driverride() {
+        if (history.hasActiveRide(currentDriver)) {
+            System.out.println("You already have an active ride. Cancel it first to make new one.");
+            return;
+        }
+        System.out.print("Start Location: ");
+        String start = scanner.nextLine();
+        currentDriver.setStartLocation(start);
+
+        System.out.print("End Location: ");
+        String end = scanner.nextLine();
+        currentDriver.setEndLocation(end);
+
+        System.out.print("Departure Time (HH:mm): ");
+        LocalTime time = LocalTime.parse(scanner.nextLine());
+        currentDriver.setDepartureTime(time);
+
+        System.out.print("Available Seats: ");
+        int seats = Integer.parseInt(scanner.nextLine());
+        currentDriver.setAvailableSeats(seats);
+
+        System.out.print("Price per Seat: ");
+        double price = Double.parseDouble(scanner.nextLine());
+        currentDriver.setPricePerSeat(price);
+
+        storage.saveDrivers();
+        System.out.println("Ride details saved successfully.");
+    }
+
+    private void markRideDoneDriver() {
+        if (!history.hasActiveRide(currentDriver)) {
+            System.out.println("No active ride to mark as done.");
+            return;
+        }
+        history.markRideCompletedDriver(currentDriver);
+        System.out.println("Ride marked as completed ✅");
     }
 
     private void logoutDriver() {
@@ -281,13 +403,14 @@ public class ConsoleUI {
         if (choice == 0) return;
 
         if (choice < 1 || choice > matches.size()) {
-            System.out.println("Invalid choice.");
+            System.out.println("Invalid choice. \uD83D\uDE28");
             return;
         }
 
         RideMatch toCancel = matches.get(choice - 1);
         toCancel.getDriver().incrementSeat(toCancel.getPassenger().getId());
+        storage.saveDrivers();
         history.removeRide(toCancel);
-        System.out.println("Passenger " + toCancel.getPassenger().getName() + " removed from your ride.");
+        System.out.println("Passenger " + toCancel.getPassenger().getName() + " removed from your ride. ");
     }
 }

@@ -1,0 +1,29 @@
+[
+  {
+    "passengerId": "P1",
+    "driverId": "D1",
+    "status": "ACTIVE",
+    "distance": 0.0,
+    "score": 0.0,
+    "pickupLocation": "",
+    "dropOffLocation": ""
+  },
+  {
+    "passengerId": "1234",
+    "driverId": "6789",
+    "status": "COMPLETED",
+    "distance": 6.0,
+    "score": 61.0,
+    "pickupLocation": "University",
+    "dropOffLocation": "Gulshan"
+  },
+  {
+    "passengerId": "1234",
+    "driverId": "6789",
+    "status": "COMPLETED",
+    "distance": 6.0,
+    "score": 61.0,
+    "pickupLocation": "University",
+    "dropOffLocation": "Gulshan"
+  }
+]

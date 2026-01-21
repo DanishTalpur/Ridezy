@@ -30,14 +30,14 @@ public class MatchingEngine {
             return matches; // Invalid request
         }
 
+        String source = passenger.getPickupLocation();
+        String destination = passenger.getDropOffLocation();
+
+        Map<String, Double> distances = Dijkstra.shortestPaths(graph, source);
+        double distance = distances.getOrDefault(destination, Double.MAX_VALUE);
+
         for (Driver driver : storage.getDrivers().values()) {
             if (driver.getAvailableSeats() <= 0) continue;
-
-            String source = passenger.getPickupLocation();
-            String destination = passenger.getDropOffLocation();
-
-            Map<String, Double> distances = Dijkstra.shortestPaths(graph, source);
-            double distance = distances.getOrDefault(destination, Double.MAX_VALUE);
 
             long timeDiff = Math.abs(
                     Duration.between(driver.getDepartureTime(),
