@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="43e9e66e-e2c8-4281-980a-cd8573f6f751" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Ridezy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Ridezy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/model/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Passenger.class" beforeDir="false" afterPath="$PROJECT_DIR$/model/Passenger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/Passenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ridezy/Ridezy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ridezy/Ridezy.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ridezy/debug.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ridezy/model/Driver.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ridezy/model/Driver.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ridezy/model/Passenger.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ridezy/model/Passenger.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ridezy/storage/RideHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ridezy/storage/RideHistory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ridezy/storage/UserStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ridezy/storage/UserStorage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Ridezy/ui/ConsoleUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Ridezy/ui/ConsoleUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/MatchingEngine.class" beforeDir="false" afterPath="$PROJECT_DIR$/service/MatchingEngine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/RideHistory.class" beforeDir="false" afterPath="$PROJECT_DIR$/storage/RideHistory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/RideHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/storage/RideHistory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/UserStorage.class" beforeDir="false" afterPath="$PROJECT_DIR$/storage/UserStorage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/UserStorage.java" beforeDir="false" afterPath="$PROJECT_DIR$/storage/UserStorage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ConsoleUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ConsoleUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui/ConsoleUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/ui/ConsoleUI.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="38RTTjaq9hwpuoCqAImjthv3Qvm" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Gui&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programing/Ridezy&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="43e9e66e-e2c8-4281-980a-cd8573f6f751" name="Changes" comment="" />
+      <created>1768761393807</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1768761393807</updated>
+      <workItem from="1768761397264" duration="5805000" />
+      <workItem from="1768781068743" duration="265000" />
+      <workItem from="1768809101038" duration="5192000" />
+      <workItem from="1768936349850" duration="3651000" />
+      <workItem from="1768946697901" duration="1681000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
