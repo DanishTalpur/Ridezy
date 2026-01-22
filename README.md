@@ -49,19 +49,66 @@ The application provides a **graphical user interface (GUI)** for smooth user in
 ## 📂 Project Structure
 
 Ridezy/
-│
-├── src/
-│ ├── model/ # Core entities (Passenger, Driver, RideMatch, RideStatus)
-│ ├── storage/ # File handling & persistence (RideHistory, Database)
-│ ├── controller/ # JavaFX controllers
-│ ├── view/ # FXML files
-│ └── Main.java # Application entry point
-│
-├── lib/
-│ └── gson-2.10.1.jar
-│
-├── rides.json # Persistent ride data
-└── README.md
+├── .idea/                  # IDE config and library references
+│   └── libraries/
+│       ├── javafx_base.xml
+│       └── sqlite_jdbc_3_51_1_0.xml
+├── algorithm/              # Pathfinding algorithms
+│   ├── Dijkstra.class
+│   └── Dijkstra.java
+├── config/                 # Application configuration
+│   └── AppConfig.java
+├── data/                   # JSON data storage
+│   ├── drivers.json
+│   ├── passengers.json
+│   └── rides.json
+├── datastructures/         # Graph and edges
+│   ├── Edge.class
+│   ├── Edge.java
+│   ├── Graph.class
+│   └── Graph.java
+├── img/                    # Images
+│   └── logo.png
+├── lib/                    # External libraries
+│   └── gson-2.10.1.jar
+├── model/                  # Core entities
+│   ├── Driver.class
+│   ├── Driver.java
+│   ├── Passenger.class
+│   ├── Passenger.java
+│   ├── Ride.java
+│   ├── RideMatch.class
+│   ├── RideMatch.java
+│   ├── RideStatus.class
+│   └── RideStatus.java
+├── service/                # Business logic
+│   ├── MatchingEngine.class
+│   └── MatchingEngine.java
+├── storage/                # File handling and persistence
+│   ├── Database.java
+│   ├── RideHistory.class
+│   ├── RideHistory.java
+│   └── UserStorage.java
+├── ui/                     # User interface
+│   ├── ConsoleUI.class
+│   ├── ConsoleUI.java
+│   └── fx/
+│       ├── RidezyApp.java
+│       └── controllers/
+│           ├── CreateRideController.java
+│           ├── CurrentRideController.java
+│           ├── DriverDashboardController.java
+│           ├── LoginController.java
+│           ├── LoginRegistrationController.java
+│           ├── MapController.java
+│           ├── PassengerDashboardController.java
+│           ├── RequestRideController.java
+│           ├── RideHistoryController.java
+│           ├── SelectRideController.java
+│           └── SplashScreenController.java
+└── util/                   # Utility classes
+    ├── CityGraphBuilder.class
+    └── CityGraphBuilder.java
 
 
 ---
