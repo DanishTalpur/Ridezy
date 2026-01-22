@@ -1,22 +1,24 @@
 [
   {
-    "id": "6789",
-    "name": "Sindh",
+    "id": "1234",
+    "name": "Sam",
     "startLocation": "University",
-    "endLocation": "Gulshan",
-    "departureTime": "11:00",
-    "availableSeats": 4,
+    "endLocation": "Defence",
+    "departureTime": "12:00",
+    "availableSeats": 1,
     "pricePerSeat": 200.0,
-    "bookedPassengerIds": ["1234", "1234", "1234"]
+    "bookedPassengerIds": [
+      "1234"
+    ]
   },
   {
-    "id": "D1",
-    "name": "Sindhya",
+    "id": "6789",
+    "name": "Sohaib",
     "startLocation": "University",
     "endLocation": "Defense",
     "departureTime": "12:00",
-    "availableSeats": 1,
+    "availableSeats": 2,
     "pricePerSeat": 1000.0,
-    "bookedPassengerIds": ["P1", "1234"]
+    "bookedPassengerIds": []
   }
 ]

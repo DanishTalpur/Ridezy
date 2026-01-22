@@ -51,6 +51,10 @@ public class Driver {
     }
 
     public List<String> getBookedPassengerIds() {
+        // Initialize if null (happens when deserializing old data)
+        if (bookedPassengerIds == null) {
+            bookedPassengerIds = new ArrayList<>();
+        }
         return bookedPassengerIds;
     }
 
@@ -83,7 +87,7 @@ public class Driver {
     }
 
     public void setBookedPassengerIds(List<String> bookedPassengerIds) {
-        this.bookedPassengerIds = bookedPassengerIds;
+        this.bookedPassengerIds = bookedPassengerIds != null ? bookedPassengerIds : new ArrayList<>();
     }
 
     // -------------------- Seat Management --------------------
@@ -95,11 +99,19 @@ public class Driver {
         if (availableSeats <= 0) {
             throw new IllegalStateException("No seats available");
         }
+        // Initialize if null
+        if (bookedPassengerIds == null) {
+            bookedPassengerIds = new ArrayList<>();
+        }
         availableSeats--;
         bookedPassengerIds.add(passengerId);
     }
 
     public void incrementSeat(String passengerId) {
+        // Initialize if null
+        if (bookedPassengerIds == null) {
+            bookedPassengerIds = new ArrayList<>();
+        }
         if (bookedPassengerIds.remove(passengerId)) {
             availableSeats++;
         }
@@ -107,6 +119,10 @@ public class Driver {
 
     // -------------------- Optional --------------------
     public boolean isPassengerBooked(String passengerId) {
+        // Initialize if null
+        if (bookedPassengerIds == null) {
+            bookedPassengerIds = new ArrayList<>();
+        }
         return bookedPassengerIds.contains(passengerId);
     }
 }

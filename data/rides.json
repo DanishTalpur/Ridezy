@@ -1,29 +1,20 @@
 [
   {
-    "passengerId": "P1",
-    "driverId": "D1",
+    "passengerId": "1234",
+    "driverId": "6789",
+    "status": "COMPLETED",
+    "distance": 1.7976931348623157E308,
+    "score": 8.988465674311579E307,
+    "pickupLocation": "University",
+    "dropOffLocation": "Defense"
+  },
+  {
+    "passengerId": "1234",
+    "driverId": "1234",
     "status": "ACTIVE",
-    "distance": 0.0,
-    "score": 0.0,
-    "pickupLocation": "",
-    "dropOffLocation": ""
-  },
-  {
-    "passengerId": "1234",
-    "driverId": "6789",
-    "status": "COMPLETED",
-    "distance": 6.0,
-    "score": 61.0,
+    "distance": 17.0,
+    "score": 48.5,
     "pickupLocation": "University",
-    "dropOffLocation": "Gulshan"
-  },
-  {
-    "passengerId": "1234",
-    "driverId": "6789",
-    "status": "COMPLETED",
-    "distance": 6.0,
-    "score": 61.0,
-    "pickupLocation": "University",
-    "dropOffLocation": "Gulshan"
+    "dropOffLocation": "Defence"
   }
 ]

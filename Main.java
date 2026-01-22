@@ -1,9 +1,16 @@
 import ui.fx.RidezyApp;
 
+import datastructures.Graph;
+import ui.ConsoleUI;
+import util.CityGraphBuilder;
+
 public class Main {
     public static void main(String[] args) {
-        // Launch JavaFX Application
-        RidezyApp.main(args);
+        Graph cityGraph = CityGraphBuilder.buildKarachiGraph();
+        ConsoleUI ui = new ConsoleUI(cityGraph);
+        ui.start();
+
+
+//        RidezyApp.main(args);
     }
 }
-

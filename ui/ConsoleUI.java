@@ -24,7 +24,7 @@ public class ConsoleUI {
         this.scanner = new Scanner(System.in);
         this.storage = new UserStorage();
         this.history = new RideHistory(storage);
-        this.matchingEngine = new MatchingEngine(graph, storage);
+        this.matchingEngine = new MatchingEngine(graph, storage, history);
     }
 
     public void start() {
@@ -133,8 +133,11 @@ public class ConsoleUI {
             System.out.println("No active ride.");
             return;
         }
+
+        // Mark as completed in history
         history.markRideCompleted(currentPassenger);
-        System.out.println("Ride marked as completed ✅");
+
+        System.out.println("Ride marked as completed");
     }
 
     private void logoutPassenger() {
@@ -172,7 +175,6 @@ public class ConsoleUI {
         LocalTime time = LocalTime.parse(scanner.nextLine());
         currentPassenger.setPreferredTime(time);
 
-
         PriorityQueue<RideMatch> matches = matchingEngine.findMatches(currentPassenger);
         if (matches.isEmpty()) {
             System.out.println("No rides available.");
@@ -191,8 +193,8 @@ public class ConsoleUI {
                     + " | Route: " + m.getDriver().getStartLocation() + " → " + m.getDriver().getEndLocation()
                     + " | Departure: " + m.getDriver().getDepartureTime()
                     + " | Price: " + m.getDriver().getPricePerSeat()
-                    + " | Distance: " + m.getDistance()
-                    + " | Score: " + m.getScore()
+                    + " | Distance: " + String.format("%.2f", m.getDistance()) // 2 decimal places
+                    + " | Score: " + String.format("%.2f", m.getScore()) // 2 decimal places
                     + " | Available Seats: " + m.getDriver().getAvailableSeats());
         }
 
@@ -221,7 +223,6 @@ public class ConsoleUI {
             }
         }
 
-        // Use Driver's new method to decrement seat and track passenger
         if (!selectedMatch.getDriver().hasAvailableSeats()) {
             System.out.println("Driver has no available seats.");
             return;
@@ -229,7 +230,6 @@ public class ConsoleUI {
 
         selectedMatch.getDriver().decrementSeat(currentPassenger.getId());
         storage.saveDrivers();
-        // Pass pickup and dropoff locations explicitly to ensure they're saved
         history.addRide(selectedMatch, currentPassenger.getPickupLocation(), currentPassenger.getDropOffLocation());
         System.out.println("Ride booked successfully with Driver: " + selectedMatch.getDriver().getName());
     }
